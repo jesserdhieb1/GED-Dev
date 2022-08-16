@@ -2,8 +2,12 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const connect  = require('./db/connect')
+const {StatusCode} = require('http-status-codes')
 
 
+app.get('/',(req,res)=>{
+    res.status(StatusCode.OK).send('Hello :)')
+})
 
 
 
