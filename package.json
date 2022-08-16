@@ -1,0 +1,19 @@
+{
+  "name": "ged",
+  "version": "1.0.0",
+  "description": "this is a project that is an electronic file manager responsible for managing the insurance's client documents",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesserdhieb1/GED-Dev.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jesserdhieb1/GED-Dev/issues"
+  },
+  "homepage": "https://github.com/jesserdhieb1/GED-Dev#readme"
+}
