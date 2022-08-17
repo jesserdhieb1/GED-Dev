@@ -57,7 +57,11 @@ npm install && npm start
 
 - find all contrat(by only admin,personnel)
 
-- find all contrat Speciale(by admin,personnel,assurance)=>speciale pour chaque assurance
+- find all contrat by assurance(by admin,personnel,assurance)
+
+- find all contrat by Bureau(by admin,personnel)
+
+- find all contrat by User(by admin,personnel)
 
 - update contrat(by only admin,personnel)
 
