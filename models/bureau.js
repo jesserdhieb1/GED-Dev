@@ -10,7 +10,7 @@ const bureauSchema = mongoose.Schema({
     adresse:{
         type:String,
         required:[true,`svp entrez l'adresse du bureau`],
-        maxLength:20
+        maxLength:50
     }
 })
 
