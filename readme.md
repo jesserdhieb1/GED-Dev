@@ -3,7 +3,7 @@
 
 ***variables***  | ***contenu***
 ------------- | -------------
-***MONGO_URI***  | le lien de connection avec le cloud de mongo db qui stocke nos données sur l'url < http://cloud.mongodb.com >
+***MONGO_URI***  | le lien de connection avec le cloud de mongo db qui stocke nos données sur l'url  http://cloud.mongodb.com 
 ***PORT***  | le numero de port ou le serveur est connecté
 ***JWT_SECRET***  | le mo sect qui encode le token JWT
 ***JWT_LIFETIME***  | la durée avant que le token JWT expire
