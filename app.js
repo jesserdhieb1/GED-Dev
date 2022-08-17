@@ -1,15 +1,20 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const connect  = require('./db/connect')
 const {StatusCode} = require('http-status-codes')
+
+//connection function
+const connect  = require('./db/connect')
+//error middlewares
 const notFoundMiddleware = require('./middleware/not-found')
+const errorHandlerMiddleware = require('./middleware/error-handler')
 
 
 app.get('/',(req,res)=>{
     res.status(StatusCode.OK).send('Hello :)')
 })
 
+app.use(errorHandlerMiddleware)
 app.use(notFoundMiddleware)
 
 const port = process.env.PORT || 5000
