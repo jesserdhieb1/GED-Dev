@@ -1,8 +1,12 @@
 const {StatusCodes} = require('http-status-codes')
+const { CustomAPIError } = require('../errors')
 
 const errorHandlerMiddleware = (req,res,err,next)=>{
     //to remove in production phase
-    // console.log(err)
+    console.log('tesst')
+    if (err instanceof CustomAPIError) {
+      return res.status(err.statusCode).json({ msg: err.message })
+    }
     let CustomError = {
         statusCode:err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
         message:err.message || 'Something went wrong, try again later'
