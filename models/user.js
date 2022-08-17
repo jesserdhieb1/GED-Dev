@@ -3,18 +3,19 @@ const crypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 const userSchema = mongoose.Schema({
-    nom:{
+    name:{
         type:String,
         required:[true,`svp entrez votre nom `],
         maxLength:20
     },
-    prenom:{
+    surname:{
         type:String,
         required:[true,`svp entrez votre prenom `],
         maxLength:20
     },
     role:{
         type:String,
+        required:[true,`svp entrez le role `],
         enum:{
             values:['ADMIN','PERSONNEL','ASSURANCE'],
             message:`{VALUE} n'exist pas`
@@ -29,18 +30,18 @@ const userSchema = mongoose.Schema({
     },
     password:{
         type:String,
-        required:[true,'please entrez votre mot de passe'],
+        required:[true,'svp entrez votre mot de passe'],
         minLength: 6
     }
 })
 
 userSchema.pre('save',async function(){
-    const salt = crypt.genSalt(10)
+    const salt =await crypt.genSalt(10)
     this.password= await crypt.hash(this.password,salt)
 })
 
 userSchema.methods.createJWT = function (){
-    const token = jwt.sign({userId:this._id,role:this.role,nom:this.nom},process.env.JWT_SECRET,{expiresIn: process.env.JWT_LIFETIME})
+    const token = jwt.sign({userId:this._id,role:this.role,name:this.name},process.env.JWT_SECRET,{expiresIn: process.env.JWT_LIFETIME})
     return token
 }
 

@@ -2,7 +2,7 @@ const {StatusCodes} = require('http-status-codes')
 
 const errorHandlerMiddleware = (req,res,err,next)=>{
     //to remove in production phase
-    console.log(err)
+    // console.log(err)
     let CustomError = {
         statusCode:err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
         message:err.message || 'Something went wrong, try again later'
