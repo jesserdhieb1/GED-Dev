@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
-
+const crypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
 const userSchema = mongoose.Schema({
     nom:{
         type:String,
@@ -32,4 +34,18 @@ const userSchema = mongoose.Schema({
     }
 })
 
+userSchema.pre('save',async function(){
+    const salt = crypt.genSalt(10)
+    this.password= await crypt.hash(this.password,salt)
+})
+
+userSchema.methods.createJWT = function (){
+    const token = jwt.sign({userId:this._id,role:this.role,nom:this.nom},process.env.JWT_SECRET,{expiresIn: process.env.JWT_LIFETIME})
+    return token
+}
+
+userSchema.methods.comparePassword =async function (pass){
+    const isMatch= await crypt.compare(pass,this.password)
+    return isMatch
+}
 module.exports=mongoose.model('User',userSchema)
