@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const {StatusCode} = require('http-status-codes')
+const {StatusCodes} = require('http-status-codes')
 
 //connection function
 const connect  = require('./db/connect')
@@ -11,7 +11,7 @@ const errorHandlerMiddleware = require('./middleware/error-handler')
 
 
 app.get('/',(req,res)=>{
-    res.status(StatusCode.OK).send('Hello :)')
+    res.status(StatusCodes.OK).send('Hello :)')
 })
 
 app.use(errorHandlerMiddleware)
