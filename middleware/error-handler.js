@@ -1,12 +1,8 @@
 const {StatusCodes} = require('http-status-codes')
-const { CustomAPIError } = require('../errors')
 
-const errorHandlerMiddleware = (req,res,err,next)=>{
+const errorHandlerMiddleware = (err,req,res,next)=>{
     //to remove in production phase
-    console.log('tesst')
-    if (err instanceof CustomAPIError) {
-      return res.status(err.statusCode).json({ msg: err.message })
-    }
+    // console.log(err)
     let CustomError = {
         statusCode:err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
         message:err.message || 'Something went wrong, try again later'
@@ -16,7 +12,7 @@ const errorHandlerMiddleware = (req,res,err,next)=>{
             .map((item)=>item.message).join(', ')
         CustomError.statusCode=StatusCodes.BAD_REQUEST
     }
-    if (err.code && err.status === 11000){
+    if (err.code && err.code === 11000){
         CustomError.message=`Duplicate value entered for ${Object.keys(err.keyValue)} please choose another value`
         CustomError.statusCode=StatusCodes.BAD_REQUEST
     }
