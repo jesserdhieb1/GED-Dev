@@ -33,6 +33,10 @@ const userSchema = mongoose.Schema({
         type:String,
         required:[true,'svp entrez votre mot de passe'],
         minLength: 6
+    },
+    assuranceName:{
+        type:String,
+        default: 'none'
     }
 })
 

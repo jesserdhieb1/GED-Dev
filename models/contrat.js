@@ -7,6 +7,11 @@ const contratSchema =new mongoose.Schema({
         maxlength: 30,
         unique:true
     },
+    nomContrat:{
+        type:String,
+        required:[true,`veuillez ajouter le nom du contrat`],
+        minLength:3
+    },
     nomClient:{
         type:String,
         required:[true,`veuillez ajouter le nom du client`],
@@ -42,15 +47,26 @@ const contratSchema =new mongoose.Schema({
     numeroTel:{
         type:Number
     },
+    assurance:{
+        type:String,
+        required:[true,`svp ajoutez l'assurance`],
+        maxlength: 30,
+    },
+    presenceOrganisme:{
+        type:Boolean,
+        default: false,
+    },
+    typeOperation:{
+        type:String,
+        enum:{
+            values:['Ouverture','SousNouvAff','Avenants','Sinistre'],
+            message:`{VALUE} n'exist pas`
+        }
+    },
     createdBy:{
         type:mongoose.Types.objectId,
         ref:'User',
         required:[true,'svp ajoutez le personnel']
-    },
-    assurance:{
-        type:mongoose.Types.objectId,
-        ref:'Assurance',
-        required:[true,`svp ajoutez l'assurance`]
     },
     bureau:{
         type:mongoose.Types.objectId,
