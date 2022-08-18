@@ -3,8 +3,29 @@ const {StatusCodes} = require("http-status-codes");
 const {UnauthenticatedError,BadRequestError,NotFoundError} = require('../errors')
 
 const findAllBureau =async (req,res)=>{
-    const bureaux =await Bureau.find({})
-    res.status(StatusCodes.OK).json({bureaux,nbBureaux:bureaux.length})
+    const role = req.user.role
+    if ( role==='ADMIN' || role==='PERSONNEL') {
+        const bureaux = await Bureau.find({})
+        res.status(StatusCodes.OK).json({bureaux, nbBureaux: bureaux.length})
+    }
+    else {
+        throw new UnauthenticatedError('Role non autorisé ')
+    }
+}
+
+const findOneBureau =async (req,res)=>{
+    const role = req.user.role
+    if ( role==='ADMIN' || role==='PERSONNEL' ){
+        const bureauId = req.params.id
+        const bureau = await Bureau.findOne({_id:bureauId})
+        if (!bureau){
+            throw new NotFoundError('id de bureau incorrecte ')
+        }
+        res.status(StatusCodes.OK).json({bureau})
+    }
+    else {
+        throw new UnauthenticatedError('Role non autorisé ')
+    }
 }
 
 const createBureau=async (req,res)=>{
@@ -52,4 +73,4 @@ const updateBureau=async (req,res)=>{
     }
 }
 
-module.exports={createBureau,deleteBureau,updateBureau,findAllBureau}
+module.exports={createBureau,deleteBureau,updateBureau,findAllBureau,findOneBureau}
