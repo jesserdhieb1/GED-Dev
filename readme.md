@@ -15,7 +15,7 @@ npm install && npm start
 ```
 
 # Diagramme de classes 
-![diagramme de classe](https://user-images.githubusercontent.com/73405867/185037237-51754eb7-2316-48b5-a853-1e5fdab973ab.png)
+![diagramme de classe](https://user-images.githubusercontent.com/73405867/185291637-70c4eeca-01f4-4501-bccc-c08b568ed8c0.png)
 
 # Fonctionnalitées 
 
