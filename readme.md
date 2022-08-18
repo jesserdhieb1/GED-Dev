@@ -43,6 +43,8 @@ npm install && npm start
 
 - findOne Assurance(by only admin,personnel)
 
+- create Assurance(by only admin,personnel)
+
 - find all Assurance(by only admin,personnel)
 
 - update Assurance(by only admin,personnel)
@@ -52,6 +54,8 @@ npm install && npm start
 ### Bureau
 
 - findOne bureau(by only admin,personnel)
+
+- create bureau (by only admin,personnel)
 
 - find all bureau(by only admin,personnel)
 
@@ -72,6 +76,8 @@ npm install && npm start
 - find all contrat by Bureau(by admin,personnel)
 
 - find all contrat by User(by admin,personnel)
+
+- create contrat(by only admin,personnel)
 
 - update contrat(by only admin,personnel)
 
