@@ -2,6 +2,10 @@ const Bureau = require('../models/bureau')
 const {StatusCodes} = require("http-status-codes");
 const {UnauthenticatedError,BadRequestError,NotFoundError} = require('../errors')
 
+const findAllBureau =async (req,res)=>{
+    const bureaux =await Bureau.find({})
+    res.status(StatusCodes.OK).json({bureaux,nbBureaux:bureaux.length})
+}
 
 const createBureau=async (req,res)=>{
     const role = req.user.role
@@ -48,4 +52,4 @@ const updateBureau=async (req,res)=>{
     }
 }
 
-module.exports={createBureau,deleteBureau,updateBureau}
+module.exports={createBureau,deleteBureau,updateBureau,findAllBureau}
