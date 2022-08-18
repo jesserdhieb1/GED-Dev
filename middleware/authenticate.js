@@ -3,9 +3,9 @@ const {UnauthenticatedError} = require('../errors')
 require('dotenv').config()
 
 const authenticate  = async (req,res,next)=>{
-    const authHeader = req.header.authorization
+    const authHeader = req.headers.authorization
     if (!authHeader || !authHeader.startsWith('Bearer ')){
-        throw new UnauthenticatedError('non autorisé veuillez réessayer une autre fois')
+        throw new UnauthenticatedError('non autorisé veuillez réessayer une autre fois :(')
     }
     const token = authHeader.split(' ')[1]
     try{

@@ -2,9 +2,12 @@ require('dotenv').config()
 require('express-async-errors');
 const express = require('express')
 const app = express()
+//middlewares
 const {StatusCodes} = require('http-status-codes')
+const authenticateMiddleware = require('./middleware/authenticate')
+//routes
 const authRoutes = require('./routes/authentification')
-
+const bureauRoutes = require('./routes/bureau')
 //connection function
 const connect  = require('./db/connect')
 //error middlewares
@@ -19,6 +22,7 @@ app.get('/',(req,res)=>{
 
 //routes
 app.use('/api/v1/auth',authRoutes)
+app.use('/api/v1/bureau',authenticateMiddleware,bureauRoutes)
 
 app.use(errorHandlerMiddleware)
 app.use(notFoundMiddleware)

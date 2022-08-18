@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const {model} = require("mongoose");
+
 
 const bureauSchema = mongoose.Schema({
     nomBureau:{
@@ -14,4 +14,4 @@ const bureauSchema = mongoose.Schema({
     }
 })
 
-model.exports=mongoose.model('Bureau',bureauSchema)
+module.exports=mongoose.model('Bureau',bureauSchema)
