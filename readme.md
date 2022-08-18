@@ -27,6 +27,8 @@ npm install && npm start
 
 ### User
 
+- findOne user(by only admin)
+
 - find all users (by only admin)
 
 - update users (by only admin)
@@ -39,6 +41,8 @@ npm install && npm start
 
 ### Assurance
 
+- findOne Assurance(by only admin,personnel)
+
 - find all Assurance(by only admin,personnel)
 
 - update Assurance(by only admin,personnel)
@@ -47,6 +51,8 @@ npm install && npm start
 
 ### Bureau
 
+- findOne bureau(by only admin,personnel)
+
 - find all bureau(by only admin,personnel)
 
 - update bureau(by only admin)
@@ -54,6 +60,10 @@ npm install && npm start
 - delete bureau(by only admin)
 
 ### Contrat
+
+- findOne Contrat(by only admin,personnel)
+
+- findOne Contrat with assurance(by only admin,personnel,assurance)
 
 - find all contrat(by only admin,personnel)
 
