@@ -29,4 +29,20 @@ const findAllUser = async (req,res)=>{
     }
 }
 
-module.exports= {findOneUser,findAllUser}
+const deleteUser  = async (req,res)=>{
+    const role = req.user.role
+    if (role === 'ADMIN') {
+        const userId = req.params.id
+        const user = await User.findOneAndDelete({_id:userId})
+        if (!user){
+            throw new NotFoundError(`user n'existe pas`)
+        }
+        res.status(StatusCodes.OK).json({msg:"user deleted"})
+    }
+    else {
+        throw new UnauthenticatedError('Role non autorisé ')
+    }
+}
+
+
+module.exports= {findOneUser,findAllUser,deleteUser}

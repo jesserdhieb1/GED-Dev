@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
 
-const {findOneUser,findAllUser} = require('../controllers/user')
+const {findOneUser,findAllUser,deleteUser} = require('../controllers/user')
 
 
 router.route('/').get(findAllUser)
-router.route('/:id').get(findOneUser)
+router.route('/:id').get(findOneUser).delete(deleteUser)
 
 
 
