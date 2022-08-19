@@ -35,6 +35,8 @@ npm install && npm start
 
 - delete users (by only admin)
 
+- reset user password (by all)
+
 - accept user (by only admin) => with changing the role
 
 - block user (by only admin) => with changing the role
