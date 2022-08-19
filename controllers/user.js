@@ -18,5 +18,15 @@ const findOneUser = async (req,res)=>{
     }
 }
 
+const findAllUser = async (req,res)=>{
+    const role = req.user.role
+    if (role === 'ADMIN'){
+        const users = await User.find({})
+        res.status(StatusCodes.OK).json({users,nbUsers:users.length})
+    }
+    else {
+        throw new UnauthenticatedError('Role non autorisé ')
+    }
+}
 
-module.exports= {findOneUser}
+module.exports= {findOneUser,findAllUser}
