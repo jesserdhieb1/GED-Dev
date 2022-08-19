@@ -39,18 +39,6 @@ npm install && npm start
 
 - block user (by only admin) => with changing the role
 
-### Assurance
-
-- findOne Assurance(by only admin,personnel)
-
-- create Assurance(by only admin,personnel)
-
-- find all Assurance(by only admin,personnel)
-
-- update Assurance(by only admin,personnel)
-
-- delete Assurance(by only admin,personnel)
-
 ### Bureau
 
 - findOne bureau(by only admin,personnel)
