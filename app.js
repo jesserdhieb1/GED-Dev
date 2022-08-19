@@ -8,6 +8,7 @@ const authenticateMiddleware = require('./middleware/authenticate')
 //routes
 const authRoutes = require('./routes/authentification')
 const bureauRoutes = require('./routes/bureau')
+const userRoutes = require('./routes/user')
 //connection function
 const connect  = require('./db/connect')
 //error middlewares
@@ -23,6 +24,7 @@ app.get('/',(req,res)=>{
 //routes
 app.use('/api/v1/auth',authRoutes)
 app.use('/api/v1/bureau',authenticateMiddleware,bureauRoutes)
+app.use('/api/v1/user',authenticateMiddleware,userRoutes)
 
 app.use(errorHandlerMiddleware)
 app.use(notFoundMiddleware)
