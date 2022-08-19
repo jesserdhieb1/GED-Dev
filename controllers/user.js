@@ -45,4 +45,22 @@ const deleteUser  = async (req,res)=>{
 }
 
 
-module.exports= {findOneUser,findAllUser,deleteUser}
+const updateUser  = async (req,res)=>{
+    const role = req.user.role
+    if (role === 'ADMIN') {
+        const userId = req.params.id
+        if (req.body.password){
+            throw new BadRequestError(`you can't update user password here`)
+        }
+        const user = await User.findOneAndUpdate({_id:userId},req.body,{runValidators:true,new:true})
+        if (!user){
+            throw new NotFoundError(`user n'existe pas`)
+        }
+        res.status(StatusCodes.OK).json({user})
+    }
+    else {
+        throw new UnauthenticatedError('Role non autorisé ')
+    }
+}
+
+module.exports= {findOneUser,findAllUser,deleteUser,updateUser}
