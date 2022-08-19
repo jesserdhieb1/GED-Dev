@@ -1,7 +1,7 @@
 const User = require('../models/user')
 const {StatusCodes} = require("http-status-codes");
 const {UnauthenticatedError,BadRequestError,NotFoundError} = require('../errors')
-
+const crypt = require('bcryptjs')
 
 const findOneUser = async (req,res)=>{
     const role = req.user.role
@@ -63,4 +63,23 @@ const updateUser  = async (req,res)=>{
     }
 }
 
-module.exports= {findOneUser,findAllUser,deleteUser,updateUser}
+const resetUserPassword  = async (req,res)=>{
+    const userId = req.user.userId
+    const user  = await User.findOne({_id:userId})
+    const {oldPassword,newPassword} = req.body
+    if (oldPassword==='' || newPassword===''){
+        throw new BadRequestError('One or both of the passwords are missing')
+    }
+    const isMatch =await user.comparePassword(oldPassword)
+    if (isMatch){
+        const salt =await crypt.genSalt(10)
+        const password = await crypt.hash(newPassword,salt)
+        const newUser = await User.findOneAndUpdate({_id:userId},{password},{runValidators:true,new:true})
+        res.status(StatusCodes.OK).json({newUser})
+    }
+    else {
+        throw new UnauthenticatedError('please verify your password')
+    }
+}
+
+module.exports= {findOneUser,findAllUser,deleteUser,updateUser,resetUserPassword}
