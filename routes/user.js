@@ -1,10 +1,12 @@
 const express = require('express')
 const router = express.Router()
 
-const {findOneUser,findAllUser,deleteUser,updateUser,resetUserPassword} = require('../controllers/user')
+const {findOneUser,findAllUser,deleteUser,updateUser,resetUserPassword,changeRoleUser} = require('../controllers/user')
 
 
-router.route('/').get(findAllUser).patch(resetUserPassword)
+router.route('/reset-password').patch(resetUserPassword)
+router.route('/reset-role/:id').patch(changeRoleUser)
+router.route('/').get(findAllUser)
 router.route('/:id').get(findOneUser).delete(deleteUser).patch(updateUser)
 
 

@@ -60,7 +60,7 @@ const contratSchema =new mongoose.Schema({
         type:String,
         enum:{
             values:['Ouverture','SousNouvAff','Avenants','Sinistre'],
-            message:`{VALUE} n'exist pas`
+            message:`{VALUE} n'exist pas dans les types de contrat`
         }
     },
     createdBy:{

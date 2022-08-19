@@ -82,4 +82,23 @@ const resetUserPassword  = async (req,res)=>{
     }
 }
 
-module.exports= {findOneUser,findAllUser,deleteUser,updateUser,resetUserPassword}
+const changeRoleUser = async (req,res)=>{
+    const role = req.user.role
+    if (role === 'ADMIN') {
+        const userId = req.params.id
+        const newRole = req.body.role
+        if (!newRole){
+            throw new BadRequestError('New role is missing')
+        }
+        const user = await User.findOneAndUpdate({_id:userId},{role:newRole},{runValidators:true,new:true})
+        if (!user){
+            throw new NotFoundError(`user n'existe pas`)
+        }
+        res.status(StatusCodes.OK).json({user})
+    }
+    else {
+        throw new UnauthenticatedError('Role non autorisé ')
+    }
+}
+
+module.exports= {findOneUser,findAllUser,deleteUser,updateUser,resetUserPassword,changeRoleUser}

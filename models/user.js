@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema({
         required:[true,`svp entrez le role `],
         enum:{
             values:['ADMIN','PERSONNEL','ASSURANCE','BLOCKED'],
-            message:`{VALUE} n'exist pas`
+            message:`{VALUE} n'exist pas dans les roles`
         },
         default:'BLOCKED'
     },
