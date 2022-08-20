@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const contratSchema =new mongoose.Schema({
+const contratSchema = mongoose.Schema({
     Identifiant:{// CIN / matricule fiscale / Ancien registre de commercial fiscal
         type:String,
         required: [true, `veuillez ajouter l'identifiant du contrat`],
@@ -64,14 +64,14 @@ const contratSchema =new mongoose.Schema({
         }
     },
     createdBy:{
-        type:mongoose.Types.objectId,
+        type:mongoose.ObjectId,
         ref:'User',
-        required:[true,'svp ajoutez le personnel']
+        required:[true,'please provide a user']
     },
     bureau:{
-        type:mongoose.Types.objectId,
+        type:mongoose.ObjectId,
         ref:'Bureau',
-        required:[true,`svp ajoutez le bureau`]
+        required:[true,'please provide bureau']
     }
 })
 
