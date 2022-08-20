@@ -5,6 +5,23 @@ const {StatusCodes} = require("http-status-codes");
 const {UnauthenticatedError,BadRequestError,NotFoundError} = require('../errors')
 
 
+const findAllContrat = async (req,res)=>{
+    const role = req.user.role
+    if ( role==='ADMIN' || role==='PERSONNEL' || role==='ASSURANCE'){
+        if ( role==='ASSURANCE'){
+            const user =await User.findOne({_id:req.user.userId})
+            const contrats = await Contrat.find({assurance:user.assuranceName})
+            res.status(StatusCodes.OK).json({contrats,nb:contrats.length})
+        }
+        const contrats = await Contrat.find({})
+        res.status(StatusCodes.OK).json({contrats,nb:contrats.length})
+    }
+    else {
+        throw new UnauthenticatedError('Role non autorisé ')
+    }
+}
+
+
 const findOneContrat = async (req,res)=>{
     const role = req.user.role
     if ( role==='ADMIN' || role==='PERSONNEL' || role==='ASSURANCE'){
@@ -49,4 +66,4 @@ const createContrat = async (req,res)=>{
 }
 
 
-module.exports={createContrat,findOneContrat}
+module.exports={createContrat,findOneContrat,findAllContrat}
