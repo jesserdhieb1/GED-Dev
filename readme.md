@@ -37,9 +37,7 @@ npm install && npm start
 
 - reset user password (by all)
 
-- accept user (by only admin) => with changing the role
-
-- block user (by only admin) => with changing the role
+- reset role user (by only admin)
 
 ### Bureau
 
