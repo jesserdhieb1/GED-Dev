@@ -80,4 +80,20 @@ const updateContrat = async (req,res)=>{
     }
 }
 
-module.exports={createContrat,findOneContrat,findAllContrat,updateContrat}
+const deleteContrat =async (req,res)=>{
+    const role = req.user.role
+    if ( role==='ADMIN' || role==='PERSONNEL'){
+        const ContratId = req.params.id
+        const contrat = await Contrat.findOneAndDelete({_id:ContratId})
+        if (!contrat){
+            throw new NotFoundError(`le contrat n'existe pas `)
+        }
+        res.status(StatusCodes.OK).json({msg:"contrat effacé"})
+    }
+    else {
+        throw new UnauthenticatedError('Role non autorisé ')
+    }
+}
+
+
+module.exports={createContrat,findOneContrat,findAllContrat,updateContrat,deleteContrat}
