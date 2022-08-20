@@ -61,10 +61,6 @@ npm install && npm start
 
 - find all contrat by assurance(by admin,personnel,assurance)
 
-- find all contrat by Bureau(by admin,personnel)
-
-- find all contrat by User(by admin,personnel)
-
 - create contrat(by only admin,personnel)
 
 - update contrat(by only admin,personnel)
