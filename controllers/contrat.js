@@ -65,5 +65,19 @@ const createContrat = async (req,res)=>{
     }
 }
 
+const updateContrat = async (req,res)=>{
+    const role = req.user.role
+    if ( role==='ADMIN' || role==='PERSONNEL'){
+        const ContratId = req.params.id
+        const contrat = await Contrat.findOneAndUpdate({_id:ContratId},req.body,{runValidators:true,new:true})
+        if (!contrat){
+            throw new NotFoundError(`le contrat n'existe pas `)
+        }
+        res.status(StatusCodes.OK).json({contrat})
+    }
+    else {
+        throw new UnauthenticatedError('Role non autorisé ')
+    }
+}
 
-module.exports={createContrat,findOneContrat,findAllContrat}
+module.exports={createContrat,findOneContrat,findAllContrat,updateContrat}
