@@ -5,6 +5,7 @@ const app = express()
 //middlewares
 const {StatusCodes} = require('http-status-codes')
 const authenticateMiddleware = require('./middleware/authenticate')
+const fileUpload = require("express-fileupload");
 //routes
 const authRoutes = require('./routes/authentification')
 const bureauRoutes = require('./routes/bureau')
@@ -17,6 +18,7 @@ const notFoundMiddleware = require('./middleware/not-found')
 const errorHandlerMiddleware = require('./middleware/error-handler')
 
 app.use(express.json());
+app.use(fileUpload());
 
 app.get('/',(req,res)=>{
     res.status(StatusCodes.OK).send('Hello :)')

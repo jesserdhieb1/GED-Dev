@@ -4,7 +4,6 @@ const User = require('../models/user')
 const {StatusCodes} = require("http-status-codes");
 const {UnauthenticatedError,BadRequestError,NotFoundError} = require('../errors')
 
-
 const findAllContrat = async (req,res)=>{
     const role = req.user.role
     if ( role==='ADMIN' || role==='PERSONNEL' || role==='ASSURANCE'){
@@ -57,6 +56,21 @@ const createContrat = async (req,res)=>{
             throw new NotFoundError('nom de bureau incorrecte ')
         }
         req.body.bureau=bureau._id
+        //upload file section
+        if (req.files && Object.keys(req.files).length !== 0) {
+            const uploadedFile = req.files.contratFile;
+            console.log(__dirname)
+            const uploadPath = __dirname + "/uploads/" + uploadedFile.name
+            console.log(uploadPath)
+            await  uploadedFile.mv(uploadPath, function (err) {
+                if (err) {
+                    throw new BadRequestError(`file didn't upload`)
+                }
+                else{
+                    req.body.path=uploadPath
+                }
+            })
+        }
         const contrat = await Contrat.create({...req.body})
         res.status(StatusCodes.CREATED).json({contrat})
     }

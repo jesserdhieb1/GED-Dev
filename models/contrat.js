@@ -63,6 +63,11 @@ const contratSchema = mongoose.Schema({
             message:`{VALUE} n'exist pas dans les types de contrat`
         }
     },
+    path:{
+        type:String,
+        required:[true,`svp ajoutez le path du fichier`],
+        minlength: 3,
+    },
     createdBy:{
         type:mongoose.ObjectId,
         ref:'User',
