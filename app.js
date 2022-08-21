@@ -5,7 +5,10 @@ const rateLimit  =require('express-rate-limit')
 const helmet = require('helmet')
 const cors =require('cors')
 const xss = require('xss-clean')
-
+//swagger
+const SwaggerUI = require('swagger-ui-express')
+const YAML = require('yamljs')
+const swaggerDocument = YAML.load('./swagger.yaml')
 
 const express = require('express')
 const app = express()
@@ -38,8 +41,9 @@ app.use(express.json());
 app.use(fileUpload());
 
 app.get('/',(req,res)=>{
-    res.status(StatusCodes.OK).send('Hello :)')
+    res.status(StatusCodes.OK).send('<h1>GED APIs</h1> <a href="/api-docs">Documentation</a>')
 })
+app.use('/api-docs',SwaggerUI.serve,SwaggerUI.setup(swaggerDocument))
 
 //routes
 app.use('/api/v1/auth',authRoutes)
@@ -48,7 +52,7 @@ app.use('/api/v1/user',authenticateMiddleware,userRoutes)
 app.use('/api/v1/contrat',authenticateMiddleware,contratRouter)
 
 app.use(errorHandlerMiddleware)
-app.use(notFoundMiddleware)
+// app.use(notFoundMiddleware)
 
 const port = process.env.PORT || 5000
 const start = async()=>{

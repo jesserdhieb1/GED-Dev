@@ -1,0 +1,645 @@
+openapi: 3.0.0
+info:
+  title: GED DEV
+  contact: {}
+  version: '1.0'
+servers:
+  - url: https://ged-assurance.herokuapp.com/api/v1
+    variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Authentication
+      summary: Register
+      operationId: Register
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+            example:
+              name: miloud
+              surname: dh
+              email: mil@gmail.com
+              password: '12345678'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            example:
+              email: jes@gmail.com
+              password: '12345678'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /bureau:
+    post:
+      tags:
+        - Bureau
+      summary: create Bureau
+      operationId: createBureau
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createBureauRequest'
+            example:
+              nomBureau: tunis
+              adresse: el asma
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - Bureau
+      summary: get All Bureau
+      operationId: getAllBureau
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /bureau/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: the bureau id
+    delete:
+      tags:
+        - Bureau
+      summary: delete Bureau
+      operationId: deleteBureau
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - Bureau
+      summary: update Bureau
+      operationId: updateBureau
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateBureauRequest'
+            example:
+              nomBureau: mahdia
+              adresse: s9ifa el ka7la
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - Bureau
+      summary: get One Bureau
+      operationId: getOneBureau
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /user:
+    get:
+      tags:
+        - User
+      summary: get All Users
+      operationId: getAllUsers
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /user/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: the user id
+    get:
+      tags:
+        - User
+      summary: get One User
+      operationId: getOneUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - User
+      summary: delete User
+      operationId: deleteUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - User
+      summary: Update User
+      operationId: UpdateUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+            example:
+              password: milod
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /user/reset-password:
+    patch:
+      tags:
+        - User
+      summary: reset Password User
+      operationId: resetPasswordUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/resetPasswordUserRequest'
+            example:
+              oldPassword: '1234567'
+              newPassword: '123456'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /user/reset-role/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: the user id
+    patch:
+      tags:
+        - User
+      summary: reset Role User
+      operationId: resetRoleUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/resetRoleUserRequest'
+            example:
+              role: ASSURANCE
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /contrat:
+    post:
+      tags:
+        - Contrat
+      summary: create Contrat
+      operationId: createContrat
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+                - contratFile
+                - Identifiant
+                - nomContrat
+                - nomClient
+                - prenomClient
+                - numContrat
+                - dateEffet
+                - dateEcheance
+                - typeContrat
+                - numeroTel
+                - assurance
+                - presenceOrganisme
+                - typeOperation
+                - bureauName
+              type: object
+              properties:
+                contratFile:
+                  type: string
+                Identifiant:
+                  type: string
+                  example: aezaeaeazeazezabaazezda
+                nomContrat:
+                  type: string
+                  example: aezaeaeazeazezaazaezzad
+                nomClient:
+                  type: string
+                  example: aezeaeazeaea
+                prenomClient:
+                  type: string
+                  example: azeaeaezaea
+                numContrat:
+                  type: string
+                  example: aezaeaeazeazezazaaezdaz
+                dateEffet:
+                  type: string
+                  example: '2022-08-13'
+                dateEcheance:
+                  type: string
+                  example: '2022-08-13'
+                typeContrat:
+                  type: string
+                  example: ferme
+                numeroTel:
+                  type: integer
+                  format: int32
+                  example: 435
+                assurance:
+                  type: string
+                  example: loyd
+                presenceOrganisme:
+                  type: boolean
+                  example: false
+                typeOperation:
+                  type: string
+                  example: Ouverture
+                bureauName:
+                  type: string
+                  example: mahdia
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - Contrat
+      summary: get All Contrat
+      operationId: getAllContrat
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /contrat/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: the contrat id
+    get:
+      tags:
+        - Contrat
+      summary: get One Contrat
+      operationId: getOneContrat
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - Contrat
+      summary: update Contrat
+      operationId: updateContrat
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateContratRequest'
+            example:
+              _id: 630052cc01de058a7ca559b3
+              Identifiant: waaaaaaasa7bi
+              nomContrat: yezzi3ad
+              nomClient: aezeaeazeaea
+              prenomClient: azeaeaezaea
+              numContrat: erzer
+              dateEffet: '2022-08-13T00:00:00.000Z'
+              dateEcheance: '2022-08-13T00:00:00.000Z'
+              typeContrat: ferme
+              numeroTel: 435
+              assurance: Gat
+              presenceOrganisme: false
+              typeOperation: Ouverture
+              createdBy: 62fd739a33b72719033a8507
+              bureau: 62fd8903d28175adb3eb0a16
+              __v: 0
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - Contrat
+      summary: Delete Contrat
+      operationId: DeleteContrat
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /contrat/download/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: the contrat id
+    get:
+      tags:
+        - Contrat
+      summary: download Contrat
+      operationId: downloadContrat
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+components:
+  schemas:
+    RegisterRequest:
+      title: RegisterRequest
+      required:
+        - name
+        - surname
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        surname:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: miloud
+        surname: dh
+        email: mil@gmail.com
+        password: '12345678'
+    LoginRequest:
+      title: LoginRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: jes@gmail.com
+        password: '12345678'
+    createBureauRequest:
+      title: createBureauRequest
+      required:
+        - nomBureau
+        - adresse
+      type: object
+      properties:
+        nomBureau:
+          type: string
+        adresse:
+          type: string
+      example:
+        nomBureau: tunis
+        adresse: el asma
+    updateBureauRequest:
+      title: updateBureauRequest
+      required:
+        - nomBureau
+        - adresse
+      type: object
+      properties:
+        nomBureau:
+          type: string
+        adresse:
+          type: string
+      example:
+        nomBureau: mahdia
+        adresse: s9ifa el ka7la
+    UpdateUserRequest:
+      title: UpdateUserRequest
+      required:
+        - password
+      type: object
+      properties:
+        password:
+          type: string
+      example:
+        password: milod
+    resetPasswordUserRequest:
+      title: resetPasswordUserRequest
+      required:
+        - oldPassword
+        - newPassword
+      type: object
+      properties:
+        oldPassword:
+          type: string
+        newPassword:
+          type: string
+      example:
+        oldPassword: '1234567'
+        newPassword: '123456'
+    resetRoleUserRequest:
+      title: resetRoleUserRequest
+      required:
+        - role
+      type: object
+      properties:
+        role:
+          type: string
+      example:
+        role: ASSURANCE
+    updateContratRequest:
+      title: updateContratRequest
+      required:
+        - _id
+        - Identifiant
+        - nomContrat
+        - nomClient
+        - prenomClient
+        - numContrat
+        - dateEffet
+        - dateEcheance
+        - typeContrat
+        - numeroTel
+        - assurance
+        - presenceOrganisme
+        - typeOperation
+        - createdBy
+        - bureau
+        - __v
+      type: object
+      properties:
+        _id:
+          type: string
+        Identifiant:
+          type: string
+        nomContrat:
+          type: string
+        nomClient:
+          type: string
+        prenomClient:
+          type: string
+        numContrat:
+          type: string
+        dateEffet:
+          type: string
+        dateEcheance:
+          type: string
+        typeContrat:
+          type: string
+        numeroTel:
+          type: integer
+          format: int32
+        assurance:
+          type: string
+        presenceOrganisme:
+          type: boolean
+        typeOperation:
+          type: string
+        createdBy:
+          type: string
+        bureau:
+          type: string
+        __v:
+          type: integer
+          format: int32
+      example:
+        _id: 630052cc01de058a7ca559b3
+        Identifiant: waaaaaaasa7bi
+        nomContrat: yezzi3ad
+        nomClient: aezeaeazeaea
+        prenomClient: azeaeaezaea
+        numContrat: erzer
+        dateEffet: '2022-08-13T00:00:00.000Z'
+        dateEcheance: '2022-08-13T00:00:00.000Z'
+        typeContrat: ferme
+        numeroTel: 435
+        assurance: Gat
+        presenceOrganisme: false
+        typeOperation: Ouverture
+        createdBy: 62fd739a33b72719033a8507
+        bureau: 62fd8903d28175adb3eb0a16
+        __v: 0
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Authentication
+    description: ''
+  - name: Bureau
+    description: ''
+  - name: User
+    description: ''
+  - name: Contrat
+    description: ''
