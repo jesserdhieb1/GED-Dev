@@ -59,20 +59,19 @@ const createContrat = async (req,res)=>{
         //upload file section
         if (req.files && Object.keys(req.files).length !== 0) {
             const uploadedFile = req.files.contratFile;
-            console.log(__dirname)
-            const uploadPath = __dirname + "/uploads/" + uploadedFile.name
-            console.log(uploadPath)
+            let fileName = uploadedFile.name
+            fileName=fileName.split('.')
+            fileName=`${fileName[0]}_${Date.now()}.${fileName[1]}`
+            const uploadPath ="./uploads/" + fileName;
+            req.body.path=uploadPath
+            const contrat = await Contrat.create({...req.body})
+            res.status(StatusCodes.CREATED).json({contrat})
             await  uploadedFile.mv(uploadPath, function (err) {
                 if (err) {
                     throw new BadRequestError(`file didn't upload`)
                 }
-                else{
-                    req.body.path=uploadPath
-                }
             })
         }
-        const contrat = await Contrat.create({...req.body})
-        res.status(StatusCodes.CREATED).json({contrat})
     }
     else {
         throw new UnauthenticatedError('Role non autorisé ')
