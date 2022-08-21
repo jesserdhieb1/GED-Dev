@@ -1,5 +1,5 @@
 # Setup
-***Remplir ces variables d'environnment dans le fichier***  ```.env``` 
+- ***Remplir ces variables d'environnment dans le fichier***  ```.env``` 
 
 ***variables***  | ***contenu***
 ------------- | -------------
@@ -10,7 +10,7 @@
 
 ***puis*** 
 
-***créer une répertoire sous le nom***  ```uploads``` 
+- ***créer une répertoire sous le nom***  ```uploads``` 
 
 ***finallement*** 
 
