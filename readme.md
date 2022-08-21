@@ -63,6 +63,8 @@ npm install && npm start
 
 - create contrat(by only admin,personnel)
 
+- download contrat(by only admin,personnel)
+
 - update contrat(by only admin,personnel)
 
 - delete contrat(by only admin,personnel)
