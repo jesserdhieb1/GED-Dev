@@ -109,4 +109,36 @@ const deleteContrat =async (req,res)=>{
 }
 
 
-module.exports={createContrat,findOneContrat,findAllContrat,updateContrat,deleteContrat}
+const downloadContrat =async (req,res)=>{
+    const role = req.user.role
+    if ( role==='ADMIN' || role==='PERSONNEL' || role==='ASSURANCE'){
+        const ContratId = req.params.id
+        if ( role==='ASSURANCE'){
+            const user =await User.findOne({_id:req.user.userId})
+            const contrat = await Contrat.findOne({_id:ContratId,assurance:user.assuranceName})
+            if (!contrat){
+                throw new NotFoundError(`le contrat n'existe pas `)
+            }
+            res.status(StatusCodes.OK).download(contrat.path,function (err){
+                if (err){
+                    throw new BadRequestError(`file didn't download`)
+                }
+            })
+        }
+        const contrat = await Contrat.findOne({_id:ContratId})
+        if (!contrat){
+            throw new NotFoundError(`le contrat n'existe pas `)
+        }
+        res.status(StatusCodes.OK).download(contrat.path,function (err){
+            if (err){
+                throw new BadRequestError(`file didn't download`)
+            }
+        })
+    }
+    else {
+        throw new UnauthenticatedError('Role non autorisé ')
+    }
+}
+
+
+module.exports={createContrat,findOneContrat,findAllContrat,updateContrat,deleteContrat,downloadContrat}
