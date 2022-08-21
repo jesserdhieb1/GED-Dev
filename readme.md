@@ -10,6 +10,10 @@
 
 ***puis*** 
 
+***créer une répertoire sous le nom ***  ```uploads``` 
+
+***finallement*** 
+
 ```bash
 npm install && npm start
 ```
