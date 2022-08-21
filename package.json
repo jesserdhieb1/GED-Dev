@@ -4,7 +4,7 @@
   "description": "this is a project that is an electronic file manager responsible for managing the insurance's client documents",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
