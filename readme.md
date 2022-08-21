@@ -1,5 +1,5 @@
 # Setup
-***Remplir ces variables d'environnment dans le fichier***  ```.env``` 
+- ***Remplir ces variables d'environnment dans le fichier***  ```.env``` 
 
 ***variables***  | ***contenu***
 ------------- | -------------
@@ -10,12 +10,16 @@
 
 ***puis*** 
 
+- ***créer une répertoire sous le nom***  ```uploads``` 
+
+***finallement*** 
+
 ```bash
 npm install && npm start
 ```
 
 # Diagramme de classes 
-![diagramme de classe](https://user-images.githubusercontent.com/73405867/185502797-39e218dd-4a46-42f4-be98-0eb6fe8d2d84.png)
+![diagramme de classe](https://user-images.githubusercontent.com/73405867/185774652-900306f9-16e8-46d8-81c4-ff9fe2d477a6.png)
 
 # Fonctionnalitées 
 
